@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Array Practice - CodePulse</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7f6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #315b42;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Progress Section */
+        .progress-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .progress-title {
+            color: #315b42;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .progress-count {
+            color: #496653;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e5ebe7;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #496653;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #315b42;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #666;
+            min-height: 45px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            background: #eef3ef;
+            color: #496653;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .solve-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px;
+            background: #496653;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .solve-btn:hover {
+            background: #385241;
+        }
+
+        .solved-btn {
+            background: #dfe9e2;
+            color: #496653;
+            border: 1px solid #cbd8ce;
+        }
+
+        .solved-btn:hover {
+            background: #dfe9e2;
+            color: #496653;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #496653;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 Array Practice</h1>
+
+    <p class="subtitle">
+        Practice 7 important Array problems for placement preparation.
+    </p>
+
+
+    <!-- ARRAY PROGRESS -->
+    <div class="progress-card">
+
+        <div class="progress-header">
+
+            <span class="progress-title">
+                Array Progress
+            </span>
+
+            <span class="progress-count"
+                  th:text="${arraySolved + ' / 7 Solved'}">
+                0 / 7 Solved
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"
+                 th:style="'width:' + (${arraySolved} * 100 / 7) + '%'">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <!-- 1 -->
+        <div class="card">
+
+            <h2>1. Find Minimum & Maximum</h2>
+
+            <p>
+                Find the minimum and maximum element in an array.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/min-max"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-min-max')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-min-max')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 2 -->
+        <div class="card">
+
+            <h2>2. Reverse an Array</h2>
+
+            <p>
+                Reverse all elements of the given array.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/reverse"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-reverse')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-reverse')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 3 -->
+        <div class="card">
+
+            <h2>3. Find Second Largest</h2>
+
+            <p>
+                Find the second-largest element in the array.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/second-largest"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-second-largest')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-second-largest')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 4 -->
+        <div class="card">
+
+            <h2>4. Search an Element</h2>
+
+            <p>
+                Check whether an element exists in the array.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/search"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-search')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-search')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 5 -->
+        <div class="card">
+
+            <h2>5. Count Even & Odd</h2>
+
+            <p>
+                Count the number of even and odd elements.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/even-odd"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-even-odd')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-even-odd')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 6 -->
+        <div class="card">
+
+            <h2>6. Sum of Array</h2>
+
+            <p>
+                Find the sum of all array elements.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/sum"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-sum')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-sum')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+
+        <!-- 7 -->
+        <div class="card">
+
+            <h2>7. Average of Array</h2>
+
+            <p>
+                Find the average of all array elements.
+            </p>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <a href="/practice/array/average"
+               class="solve-btn"
+               th:classappend="${solvedProblems.contains('array-average')} ? ' solved-btn' : ''"
+               th:text="${solvedProblems.contains('array-average')} ? '✓ Solved' : 'Solve Problem'">
+                Solve Problem
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <a href="/practice" class="back">
+        ← Back to Practice
+    </a>
+
+</div>
+
+</body>
+
+</html>

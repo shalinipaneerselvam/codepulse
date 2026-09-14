@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodePulse | Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #eef5f1, #f8faf9);
+        }
+
+        .login-container {
+            width: 390px;
+            padding: 40px;
+            background: #ffffff;
+            border: 1px solid #e2e9e5;
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(35, 55, 45, 0.10);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e8f1ec;
+            color: #47745a;
+
+            border-radius: 13px;
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .logo h1 {
+            color: #26352d;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            color: #87928b;
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        .message {
+            padding: 11px 12px;
+            border-radius: 9px;
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        .error-message {
+            color: #a34f4f;
+            background: #fff5f5;
+            border: 1px solid #f0dddd;
+        }
+
+        .logout-message {
+            color: #52715b;
+            background: #f3f8f4;
+            border: 1px solid #dce9df;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #3e4942;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+
+            background: #fafcfb;
+
+            border: 1px solid #d7dfda;
+            border-radius: 9px;
+
+            color: #26352d;
+            font-size: 14px;
+
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #a5ada7;
+        }
+
+        .form-group input:focus {
+            background: #ffffff;
+            border-color: #91aa99;
+
+            box-shadow:
+                0 0 0 3px rgba(145, 170, 153, 0.13);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+
+            margin-top: 3px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #587762;
+            color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #486652;
+            transform: translateY(-1px);
+        }
+
+        .register-link {
+            text-align: center;
+
+            margin-top: 23px;
+            padding-top: 20px;
+
+            border-top: 1px solid #edf1ee;
+
+            color: #89928c;
+            font-size: 13px;
+        }
+
+        .register-link a {
+            color: #52725c;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 3px;
+        }
+
+        .register-link a:hover {
+            color: #3e5c48;
+        }
+
+        .security-text {
+            text-align: center;
+            margin-top: 18px;
+
+            color: #a4aaa6;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            &lt;/&gt;
+        </div>
+
+        <h1>CodePulse</h1>
+
+        <p>Build. Track. Grow.</p>
+
+    </div>
+
+
+    <!-- Login Error -->
+
+    <div
+            th:if="${param.error}"
+            class="message error-message">
+
+        Invalid username or password
+
+    </div>
+
+
+    <!-- Logout Message -->
+
+    <div
+            th:if="${param.logout}"
+            class="message logout-message">
+
+        You have been logged out successfully
+
+    </div>
+
+
+    <form th:action="@{/login}" method="post">
+
+        <div class="form-group">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+
+        </div>
+
+
+        <button
+                type="submit"
+                class="login-btn">
+
+            Sign In
+
+        </button>
+
+    </form>
+
+
+    <div class="register-link">
+
+        Don't have an account?
+
+        <a th:href="@{/register}">
+            Create Account
+        </a>
+
+    </div>
+
+
+    <div class="security-text">
+
+        Secure access to your CodePulse workspace
+
+    </div>
+
+</div>
+
+</body>
+</html>

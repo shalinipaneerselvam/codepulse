@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodePulse | Find Largest Number</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f6f7f4;
+            color: #27332b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7e3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dfe9e2;
+            color: #496653;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand h1 {
+            font-size: 22px;
+            color: #27332b;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            color: #496653;
+
+            border: 1px solid #d9ded9;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #f2f6f3;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+
+            padding: 50px 30px;
+        }
+
+        /* ================= HEADER ================= */
+
+        .problem-header {
+            margin-bottom: 25px;
+        }
+
+        .problem-header h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #27332b;
+        }
+
+        .problem-header p {
+            color: #7a847d;
+            font-size: 14px;
+        }
+
+        .difficulty {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 6px 12px;
+
+            background: #eef4ef;
+            color: #496653;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7e3;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(30, 41, 35, 0.05);
+        }
+
+        .card h3 {
+            font-size: 17px;
+            color: #354139;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #6f7972;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        /* ================= EXAMPLE ================= */
+
+        .example {
+            margin-top: 18px;
+
+            background: #f6f8f6;
+
+            border: 1px solid #e3e9e4;
+
+            border-radius: 9px;
+
+            padding: 15px;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .example strong {
+            color: #496653;
+        }
+
+        /* ================= INPUT ================= */
+
+        .input-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #354139;
+        }
+
+        .number-input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d5ddd7;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            background: #fbfcfb;
+
+            transition: 0.2s ease;
+        }
+
+        .number-input:focus {
+            border-color: #769582;
+
+            background: #ffffff;
+
+            box-shadow: 0 0 0 3px rgba(118, 149, 130, 0.12);
+        }
+
+        /* ================= BUTTON ================= */
+
+        .run-btn {
+            margin-top: 18px;
+
+            padding: 11px 22px;
+
+            background: #496653;
+
+            color: #ffffff;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .run-btn:hover {
+            background: #3d5746;
+
+            transform: translateY(-1px);
+        }
+
+        /* ================= RESULT ================= */
+
+        .result {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background: #eef4ef;
+
+            border: 1px solid #d9e5dc;
+
+            border-radius: 9px;
+
+            color: #496653;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        /* ================= CODE ================= */
+
+        .code-box {
+            margin-top: 15px;
+
+            background: #f6f7f4;
+
+            border: 1px solid #e1e6e2;
+
+            border-radius: 9px;
+
+            padding: 18px;
+
+            overflow-x: auto;
+        }
+
+        .code-box pre {
+            font-family: Consolas, monospace;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            color: #354139;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            margin-top: 40px;
+
+            color: #a0a6a1;
+
+            font-size: 11px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 35px 20px;
+            }
+
+            .problem-header h2 {
+                font-size: 25px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            &lt;/&gt;
+        </div>
+
+        <h1>CodePulse</h1>
+
+    </div>
+
+
+    <a th:href="@{/practice}" class="back-btn">
+        ← Practice
+    </a>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- ================= PROBLEM HEADER ================= -->
+
+    <div class="problem-header">
+
+        <h2>
+            Find Largest Number
+        </h2>
+
+        <p>
+            Find the largest element from the given array.
+        </p>
+
+        <span class="difficulty">
+            Easy
+        </span>
+
+    </div>
+
+
+    <!-- ================= QUESTION ================= -->
+
+    <div class="card">
+
+        <h3>
+            Problem Statement
+        </h3>
+
+        <p>
+            Given an array of integers, your task is to find
+            the largest element present in the array.
+        </p>
+
+
+        <div class="example">
+
+            <strong>Example:</strong>
+            <br>
+
+            Input: 10 25 7 42 18
+            <br>
+
+            Output: 42
+
+            <br><br>
+
+            <strong>Explanation:</strong>
+            <br>
+
+            Among all the elements, 42 is the largest number.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= INPUT ================= -->
+
+    <div class="card">
+
+        <h3>
+            Try Your Input
+        </h3>
+
+        <form th:action="@{/practice/largest}" method="post">
+
+            <label class="input-label" for="numbers">
+                Enter numbers separated by spaces
+            </label>
+
+            <input
+                    type="text"
+                    id="numbers"
+                    name="numbers"
+                    class="number-input"
+                    placeholder="Example: 10 25 7 42 18"
+                    required>
+
+            <button type="submit" class="run-btn">
+                Run Code
+            </button>
+
+        </form>
+
+
+        <!-- RESULT -->
+
+        <div th:if="${result != null}" class="result">
+
+            Result:
+            <span th:text="${result}"></span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SOLUTION ================= -->
+
+    <div class="card">
+
+        <h3>
+            Java Solution
+        </h3>
+
+
+        <div class="code-box">
+
+<pre>
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {10, 25, 7, 42, 18};
+
+        int largest = numbers[0];
+
+        for (int i = 1; i &lt; numbers.length; i++) {
+
+            if (numbers[i] &gt; largest) {
+                largest = numbers[i];
+            }
+
+        }
+
+        System.out.println(largest);
+    }
+}
+</pre>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        Keep coding • Keep growing • CodePulse
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

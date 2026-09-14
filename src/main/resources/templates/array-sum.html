@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sum of Array | CodePulse</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f6f7f4;
+            color: #2f3e34;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #496653;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #496653;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #496653;
+            font-size: 32px;
+        }
+
+        .badge {
+            background: #e3eee7;
+            color: #496653;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #5c665f;
+            margin-bottom: 25px;
+        }
+
+        .example {
+            background: #f1f5f2;
+            border-left: 4px solid #587762;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .example strong {
+            color: #496653;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #3e4d43;
+        }
+
+        .number-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccd7cf;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .number-input:focus {
+            border-color: #587762;
+        }
+
+        .run-btn {
+            width: 100%;
+            padding: 14px;
+            background: #587762;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .run-btn:hover {
+            background: #496653;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            background: #e8f1eb;
+            border-radius: 10px;
+            color: #496653;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .solution {
+            margin-top: 35px;
+        }
+
+        .solution h2 {
+            color: #496653;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background: #26352c;
+            color: #f4f7f5;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        CodePulse
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <a th:href="@{/practice/arrays}" class="back-btn">
+        ← Back to Array Practice
+    </a>
+
+    <div class="problem-card">
+
+        <div class="problem-header">
+
+            <h1>Sum of Array</h1>
+
+            <span class="badge">
+                Easy
+            </span>
+
+        </div>
+
+        <p>
+            Given an array of numbers, find the sum of all
+            the elements in the array.
+        </p>
+
+        <div class="example">
+
+            <strong>Example:</strong>
+
+            <br><br>
+
+            Input: <b>10 25 7 42 18</b>
+
+            <br>
+
+            Output:
+            <b>Sum = 102</b>
+
+        </div>
+
+        <form th:action="@{/practice/array/sum}" method="post">
+
+            <label for="numbers" class="input-label">
+                Enter numbers
+            </label>
+
+            <input
+                    type="text"
+                    id="numbers"
+                    name="numbers"
+                    class="number-input"
+                    placeholder="Example: 10 25 7 42 18"
+                    required>
+
+            <button type="submit" class="run-btn">
+                Run Code
+            </button>
+
+        </form>
+
+        <div
+                th:if="${result != null}"
+                class="result">
+
+            Result:
+
+            <span th:text="${result}"></span>
+
+        </div>
+
+        <div class="solution">
+
+            <h2>Java Solution</h2>
+
+            <pre><code>int[] numbers = {10, 25, 7, 42, 18};
+
+int sum = 0;
+
+for (int i = 0; i &lt; numbers.length; i++) {
+
+    sum = sum + numbers[i];
+
+}
+
+System.out.println("Sum = " + sum);</code></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodePulse | Register</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef5f1, #f8faf9);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #26332b;
+        }
+
+        .register-box {
+            width: 410px;
+            background: #ffffff;
+            padding: 42px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(73, 102, 83, 0.12);
+            border: 1px solid #e3ebe6;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #496653;
+            margin-bottom: 6px;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #829087;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #26332b;
+            font-size: 23px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4b5b51;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            margin-bottom: 18px;
+            border: 1px solid #d5dfd9;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+            background: #fbfcfb;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #769582;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(118, 149, 130, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 5px;
+            background: #587762;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #496653;
+            transform: translateY(-1px);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #7b877f;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #587762;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            color: #496653;
+        }
+
+        .error-message {
+            color: #b45353;
+            background: #fff5f5;
+            border: 1px solid #f0d5d5;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #9aa59e;
+        }
+
+        @media (max-width: 480px) {
+            .register-box {
+                width: 90%;
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <div class="logo">CodePulse</div>
+
+    <div class="tagline">
+        Build. Track. Grow.
+    </div>
+
+    <h2>Create Account</h2>
+
+    <div th:if="${error}" class="error-message">
+        <span th:text="${error}"></span>
+    </div>
+
+    <form th:action="@{/register}" method="post">
+
+        <label for="username">Username</label>
+
+        <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required>
+
+        <label for="email">Email</label>
+
+        <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                required>
+
+        <label for="password">Password</label>
+
+        <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create password"
+                required>
+
+        <button type="submit">
+            Create Account
+        </button>
+
+    </form>
+
+    <div class="login-link">
+        Already have an account?
+        <a th:href="@{/login}">Login</a>
+    </div>
+
+    <div class="footer-text">
+        Secure access to your CodePulse workspace
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vowels and Consonants</title>
+    <style>
+        body{font-family:Arial;background:#f4f7f6;margin:0}
+        nav{background:#198754;color:white;padding:18px 40px;font-size:22px;font-weight:bold}
+        .container{width:90%;max-width:800px;margin:40px auto}
+        .back{color:#198754;text-decoration:none;font-weight:bold}
+        .card{background:white;padding:30px;border-radius:12px;box-shadow:0 3px 12px #ddd;margin-top:25px}
+        input{width:100%;padding:12px;margin:10px 0;box-sizing:border-box;border:1px solid #ccc;border-radius:7px}
+        button{background:#198754;color:white;border:0;padding:12px 22px;border-radius:7px}
+        .result{margin-top:20px;background:#e8f5e9;padding:15px;border-radius:8px}
+        pre{background:#222;color:#fff;padding:20px;border-radius:8px;overflow:auto}
+    </style>
+</head>
+<body>
+<nav>⚡ CodePulse</nav>
+
+<div class="container">
+    <a href="/practice/strings" class="back">← Back to Strings</a>
+
+    <div class="card">
+        <h1>Count Vowels & Consonants</h1>
+        <p>Count the number of vowels and consonants.</p>
+
+        <p><b>Example:</b> hello → Vowels: 2, Consonants: 3</p>
+
+        <form method="post" action="/practice/string/vowels-consonants">
+            <input type="text" name="text" placeholder="Enter a string" required>
+            <button type="submit">Solve</button>
+        </form>
+
+        <div class="result" th:if="${result}">
+            <b>Result:</b> <span th:text="${result}"></span>
+        </div>
+
+        <h2>Java Solution</h2>
+        <pre><code>int vowels = 0;
+int consonants = 0;
+
+for(char ch : text.toLowerCase().toCharArray()) {
+    if(ch >= 'a' && ch <= 'z') {
+        if(ch == 'a' || ch == 'e' || ch == 'i' ||
+           ch == 'o' || ch == 'u') {
+            vowels++;
+        } else {
+            consonants++;
+        }
+    }
+}</code></pre>
+    </div>
+</div>
+</body>
+</html>

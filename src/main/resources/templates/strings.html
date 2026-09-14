@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CodePulse | String Practice</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f6f7f4;
+            color: #27332b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7e3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dfe9e2;
+            color: #496653;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #27332b;
+        }
+
+        .dashboard-btn {
+            text-decoration: none;
+
+            color: #496653;
+
+            border: 1px solid #d9ded9;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .dashboard-btn:hover {
+            background: #f2f6f3;
+            border-color: #b9c9bd;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 50px 30px;
+        }
+
+        /* ================= BACK ================= */
+
+        .back {
+            display: inline-block;
+
+            color: #496653;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= HEADING ================= */
+
+        .heading {
+            margin-bottom: 28px;
+        }
+
+        .heading h2 {
+            font-size: 30px;
+
+            font-weight: 700;
+
+            color: #27332b;
+
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #7a847d;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7e3;
+
+            border-radius: 14px;
+
+            padding: 22px 24px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(30, 41, 35, 0.05);
+        }
+
+        .progress-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+        .progress-title {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #354139;
+        }
+
+        .progress-count {
+            font-size: 13px;
+
+            color: #496653;
+
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+
+            height: 8px;
+
+            background: #edf0ed;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+
+            background: #496653;
+
+            border-radius: 20px;
+
+            transition: width 0.4s ease;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: #ffffff;
+
+            padding: 23px;
+
+            border-radius: 14px;
+
+            border: 1px solid #e5e7e3;
+
+            box-shadow:
+                0 8px 25px
+                rgba(30, 41, 35, 0.05);
+
+            transition: 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(30, 41, 35, 0.08);
+        }
+
+        .card h2 {
+            font-size: 16px;
+
+            color: #354139;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #858d87;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-top: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        /* ================= DIFFICULTY ================= */
+
+        .difficulty {
+            display: inline-block;
+
+            background: #eef4ef;
+
+            color: #496653;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+        /* ================= BUTTON ROW ================= */
+
+        .card-bottom {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+        }
+
+        /* ================= SOLVE BUTTON ================= */
+
+        .solve-btn {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            background: #496653;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .solve-btn:hover {
+            background: #3d5746;
+
+            transform: translateY(-1px);
+        }
+
+        /* ================= SOLVED ================= */
+
+        .solved-btn {
+            background: #dfe9e2;
+
+            color: #496653;
+
+            border: 1px solid #cbd8ce;
+        }
+
+        .solved-btn:hover {
+            background: #dfe9e2;
+
+            color: #496653;
+
+            transform: none;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status {
+            font-size: 11px;
+
+            color: #8b948e;
+
+            font-weight: 500;
+        }
+
+        .status.solved {
+            color: #496653;
+
+            font-weight: 600;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            margin-top: 50px;
+
+            color: #a0a6a1;
+
+            font-size: 11px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-bottom {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            &lt;/&gt;
+        </div>
+
+        <h1>
+            CodePulse
+        </h1>
+
+    </div>
+
+
+    <a th:href="@{/dashboard}"
+       class="dashboard-btn">
+
+        Dashboard
+
+    </a>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- ================= BACK ================= -->
+
+    <a th:href="@{/practice}"
+       class="back">
+
+        ← Back to Practice
+
+    </a>
+
+
+    <!-- ================= HEADING ================= -->
+
+    <div class="heading">
+
+        <h2>
+            🔤 String Practice
+        </h2>
+
+        <p>
+            Practice 7 important String problems
+            for placement preparation.
+        </p>
+
+    </div>
+
+
+    <!-- ================= PROGRESS ================= -->
+
+    <div class="progress-card">
+
+        <div class="progress-top">
+
+            <span class="progress-title">
+                String Progress
+            </span>
+
+            <span class="progress-count">
+
+                <span th:text="${stringSolved}">
+                    0
+                </span>
+
+                / 7
+
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"
+                 th:style="|width:${stringSolved * 100 / 7}%|">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PROBLEMS ================= -->
+
+    <div class="grid">
+
+
+        <!-- ================= 1 ================= -->
+
+        <div class="card">
+
+            <h2>
+                1. Reverse a String
+            </h2>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <p>
+                Reverse the given string.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-reverse')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-reverse')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/reverse}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-reverse')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-reverse')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 2 ================= -->
+
+        <div class="card">
+
+            <h2>
+                2. String Palindrome
+            </h2>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <p>
+                Check whether a string is palindrome.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-palindrome')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-palindrome')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/palindrome}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-palindrome')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-palindrome')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 3 ================= -->
+
+        <div class="card">
+
+            <h2>
+                3. Vowels & Consonants
+            </h2>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <p>
+                Count vowels and consonants in a string.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-vowels-consonants')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-vowels-consonants')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/vowels-consonants}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-vowels-consonants')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-vowels-consonants')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 4 ================= -->
+
+        <div class="card">
+
+            <h2>
+                4. Count Characters
+            </h2>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <p>
+                Count characters in a string.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-count-characters')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-count-characters')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/count-characters}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-count-characters')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-count-characters')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 5 ================= -->
+
+        <div class="card">
+
+            <h2>
+                5. Remove Spaces
+            </h2>
+
+            <span class="difficulty">
+                Easy
+            </span>
+
+            <p>
+                Remove all spaces from a string.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-remove-spaces')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-remove-spaces')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/remove-spaces}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-remove-spaces')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-remove-spaces')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 6 ================= -->
+
+        <div class="card">
+
+            <h2>
+                6. Check Anagram
+            </h2>
+
+            <span class="difficulty">
+                Medium
+            </span>
+
+            <p>
+                Check whether two strings are anagrams.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-anagram')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-anagram')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/anagram}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-anagram')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-anagram')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= 7 ================= -->
+
+        <div class="card">
+
+            <h2>
+                7. Duplicate Characters
+            </h2>
+
+            <span class="difficulty">
+                Medium
+            </span>
+
+            <p>
+                Find duplicate characters in a string.
+            </p>
+
+            <div class="card-bottom">
+
+                <span
+                        class="status"
+                        th:classappend="${solvedProblems.contains('string-duplicates')}
+                        ? ' solved' : ''"
+                        th:text="${solvedProblems.contains('string-duplicates')}
+                        ? '✓ Completed' : 'Not completed'">
+
+                    Not completed
+
+                </span>
+
+
+                <a th:href="@{/practice/string/duplicates}"
+                   class="solve-btn"
+                   th:classappend="${solvedProblems.contains('string-duplicates')}
+                   ? ' solved-btn' : ''"
+                   th:text="${solvedProblems.contains('string-duplicates')}
+                   ? '✓ Solved' : 'Solve Problem'">
+
+                    Solve Problem
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        Keep coding • Keep growing • CodePulse
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

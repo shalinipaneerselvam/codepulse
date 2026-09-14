@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CodePulse | Fibonacci</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f6f7f4;
+            color: #27332b;
+        }
+
+        nav {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7e3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dfe9e2;
+            color: #496653;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #27332b;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            color: #496653;
+
+            border: 1px solid #d9ded9;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #f2f6f3;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+
+            padding: 50px 30px;
+        }
+
+        .problem-card,
+        .code-section {
+            background: #ffffff;
+
+            border: 1px solid #e5e7e3;
+
+            border-radius: 14px;
+
+            padding: 30px;
+
+            box-shadow: 0 8px 25px rgba(30, 41, 35, 0.05);
+
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 28px;
+
+            color: #27332b;
+
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #7a847d;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            color: #354139;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d9ded9;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #496653;
+        }
+
+        button {
+            background: #496653;
+
+            color: #ffffff;
+
+            border: none;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3d5746;
+        }
+
+        .result {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background: #eef4ef;
+
+            border-radius: 8px;
+
+            color: #496653;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .example {
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #f6f7f4;
+
+            border-radius: 10px;
+
+            color: #59645d;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        /* ================= JAVA PROGRAM ================= */
+
+        .code-section h3 {
+            font-size: 20px;
+
+            color: #354139;
+
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background: #27332b;
+
+            color: #ffffff;
+
+            padding: 22px;
+
+            border-radius: 10px;
+
+            overflow-x: auto;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        /* ================= EXPLANATION ================= */
+
+        .explanation {
+            color: #7a847d;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+
+            margin-top: 40px;
+
+            margin-bottom: 20px;
+
+            color: #a0a6a1;
+
+            font-size: 11px;
+        }
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 35px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            &lt;/&gt;
+        </div>
+
+        <h1>
+            CodePulse
+        </h1>
+
+    </div>
+
+
+    <a th:href="@{/practice}"
+       class="back-btn">
+
+        ← Practice
+
+    </a>
+
+</nav>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<div class="container">
+
+
+    <!-- ================= FIBONACCI PROBLEM ================= -->
+
+    <div class="problem-card">
+
+        <h2>
+            Fibonacci Number
+        </h2>
+
+
+        <p class="description">
+
+            Given a number, generate the Fibonacci series up to that number of terms.
+
+        </p>
+
+
+        <form th:action="@{/practice/fibonacci}"
+              method="post">
+
+            <label>
+                Enter Number of Terms
+            </label>
+
+
+            <input type="number"
+                   name="number"
+                   placeholder="Enter number of terms"
+                   min="1"
+                   required>
+
+
+            <button type="submit">
+                Find Fibonacci
+            </button>
+
+        </form>
+
+
+        <!-- ================= RESULT ================= -->
+
+        <div class="result"
+             th:if="${result != null}"
+             th:text="${result}">
+
+        </div>
+
+
+        <!-- ================= EXAMPLE ================= -->
+
+        <div class="example">
+
+            <strong>
+                Example:
+            </strong>
+
+            <br>
+
+            Input: 7
+
+            <br>
+
+            Output: 0 1 1 2 3 5 8
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVA PROGRAM ================= -->
+
+    <div class="code-section">
+
+        <h3>
+            Java Program
+        </h3>
+
+
+        <pre><code>public class Fibonacci {
+
+    public static void main(String[] args) {
+
+        int n = 7;
+
+        int first = 0;
+        int second = 1;
+
+        for (int i = 1; i &lt;= n; i++) {
+
+            System.out.print(first + " ");
+
+            int next = first + second;
+
+            first = second;
+            second = next;
+        }
+    }
+}</code></pre>
+
+    </div>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <div class="code-section">
+
+        <h3>
+            How It Works
+        </h3>
+
+
+        <p class="explanation">
+
+            The Fibonacci series starts with 0 and 1.
+
+            <br>
+
+            Each next number is calculated by adding the previous two numbers.
+
+            <br><br>
+
+            0 + 1 = 1
+
+            <br>
+
+            1 + 1 = 2
+
+            <br>
+
+            1 + 2 = 3
+
+            <br>
+
+            2 + 3 = 5
+
+            <br>
+
+            3 + 5 = 8
+
+        </p>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        Keep coding • Keep growing • CodePulse
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

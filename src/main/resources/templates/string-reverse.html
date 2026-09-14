@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reverse String</title>
+    <style>
+        body{font-family:Arial;background:#f4f7f6;margin:0}
+        nav{background:#198754;color:white;padding:18px 40px;font-size:22px;font-weight:bold}
+        .container{width:90%;max-width:800px;margin:40px auto}
+        .back{color:#198754;text-decoration:none;font-weight:bold}
+        .card{background:white;padding:30px;border-radius:12px;box-shadow:0 3px 12px #ddd;margin-top:25px}
+        input{width:100%;padding:12px;margin:10px 0;border:1px solid #ccc;border-radius:7px;box-sizing:border-box}
+        button{background:#198754;color:white;border:0;padding:12px 22px;border-radius:7px;cursor:pointer}
+        .result{margin-top:20px;background:#e8f5e9;padding:15px;border-radius:8px}
+        pre{background:#222;color:#fff;padding:20px;border-radius:8px;overflow:auto}
+    </style>
+</head>
+<body>
+<nav>⚡ CodePulse</nav>
+
+<div class="container">
+    <a href="/practice/strings" class="back">← Back to Strings</a>
+
+    <div class="card">
+        <h1>Reverse a String</h1>
+        <p>Reverse the given string.</p>
+
+        <p><b>Example:</b> hello → olleh</p>
+
+        <form method="post" action="/practice/string/reverse">
+            <input type="text" name="text" placeholder="Enter a string" required>
+            <button type="submit">Solve</button>
+        </form>
+
+        <div class="result" th:if="${result}">
+            <b>Result:</b>
+            <span th:text="${result}"></span>
+        </div>
+
+        <h2>Java Solution</h2>
+        <pre><code>String reversed = new StringBuilder(text).reverse().toString();
+System.out.println(reversed);</code></pre>
+    </div>
+</div>
+</body>
+</html>

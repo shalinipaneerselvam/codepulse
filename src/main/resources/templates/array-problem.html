@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title th:text="${title} + ' - CodePulse'">
+        Array Problem
+    </title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7f6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #315b42;
+        }
+
+        p {
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            color: #315b42;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #496653;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #385241;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f2eb;
+            border-radius: 8px;
+            color: #315b42;
+            font-weight: bold;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #496653;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 th:text="${title}">
+        Array Problem
+    </h1>
+
+    <p th:text="${description}">
+        Solve the problem.
+    </p>
+
+    <form method="post"
+          th:action="@{'/practice/array/' + ${problem}}">
+
+        <label>
+            Array
+        </label>
+
+        <input
+                type="text"
+                name="numbers"
+                placeholder="Example: 10 20 30 40 50"
+                required>
+
+        <!-- Search / Two Sum -->
+        <div th:if="${problem == 'search' || problem == 'two-sum'}">
+
+            <label th:text="${problem == 'search'} ? 'Element to Search' : 'Target Sum'">
+                Target
+            </label>
+
+            <input
+                    type="number"
+                    name="target"
+                    th:placeholder="${problem == 'search'} ? 'Example: 30' : 'Example: 50'"
+                    required>
+
+        </div>
+
+        <!-- Common Elements -->
+        <div th:if="${problem == 'common'}">
+
+            <label>
+                Second Array
+            </label>
+
+            <input
+                    type="text"
+                    name="target"
+                    placeholder="Example: 30 40 50 60"
+                    required>
+
+        </div>
+
+        <button type="submit">
+            Solve Problem
+        </button>
+
+    </form>
+
+    <div class="result"
+         th:if="${result}"
+         th:text="${result}">
+    </div>
+
+    <a class="back"
+       href="/practice/arrays">
+        ← Back to Array Practice
+    </a>
+
+</div>
+
+</body>
+</html>
